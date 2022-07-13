@@ -15,9 +15,10 @@ class CreatePhasesTable extends Migration
     {
         Schema::create('phases', function (Blueprint $table) {
             $table->id();
-            $table->string('phase')->unique();
+            $table->string('name')->unique();
             $table->string('description');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -38,3 +38,9 @@ window.initialSubNavLoad = function () {
 
 initialSubNavLoad()
 /* Opens sidebar navigation that contains sub-items */
+
+import Alpine from 'alpinejs'
+ 
+window.Alpine = Alpine
+ 
+Alpine.start()

@@ -15,10 +15,11 @@ class CreateSubphasesTable extends Migration
     {
         Schema::create('subphases', function (Blueprint $table) {
             $table->id();
-            $table->foreign('phase_id');            
-            $table->string('phase')->unique();
+            $table->foreignId('phase_id');            
+            $table->string('name')->unique();
             $table->string('description');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

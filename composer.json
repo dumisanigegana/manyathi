@@ -14,7 +14,6 @@
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
-        "laravel/cashier": "^13.11",
         "laravel/dusk": "^6.11",
         "laravel/framework": "^8.12",
         "laravel/sanctum": "^2.8",
@@ -23,7 +22,8 @@
         "laravel/ui": "^3.2",
         "livewire/livewire": "^2.3",
         "owen-it/laravel-auditing": "^13.0",
-        "qcod/laravel-gamify": "^1.0"
+        "qcod/laravel-gamify": "^1.0",
+        "wire-elements/modal": "^1.0"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

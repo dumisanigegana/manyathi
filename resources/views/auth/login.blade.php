@@ -24,22 +24,21 @@
 
                                 <div class="relative w-full mb-3">
                                     <label class="block uppercase text-gray-700 text-xs font-bold mb-2"
-                                           for="email">
-                                        {{ trans('global.login_email') }}
+                                           for="username">
+                                      Username
                                     </label>
                                     <input id="email"
-                                           name="email"
+                                           name="username"
                                            type="text"
-                                           class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150{{ $errors->has('email') ? ' border border-red-500' : '' }}"
+                                           class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150{{ $errors->has('username') ? ' border border-red-500' : '' }}"
                                            required
-                                           autocomplete="email"
                                            autofocus
-                                           placeholder="{{ trans('global.login_email') }}"
-                                           value="{{ old('email', null) }}">
+                                           placeholder="Refebence# or Email address"
+                                           value="{{ old('username', null) }}">
 
-@if($errors->has('email'))
+@if($errors->has('username'))
                                         <div class="text-red-500">
-                                            {{ $errors->first('email') }}
+                                            {{ $errors->first('username') }}
                                         </div>
 @endif
                                 </div>

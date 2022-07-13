@@ -2,11 +2,13 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use \DateTimeInterface;
+use App\Support\HasAdvancedFilter;
+// use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use OwenIt\Auditing\Contracts\Auditable;
+use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
 
-class Payable extends Model
+class Payable extends Model implements AuditableContract
 {
     
     use SoftDeletes;

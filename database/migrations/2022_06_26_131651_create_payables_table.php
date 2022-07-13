@@ -19,6 +19,7 @@ class CreatePayablesTable extends Migration
             $table->string('description');
             $table->double('price', 15, 2)->nullable()->default(1.00);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -28,9 +28,10 @@
     <form id="logoutform" action="{{ route('logout') }}" method="POST" style="display: none;">
         {{ csrf_field() }}
     </form>
-
     <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
     @livewireScripts
+    
+    @livewire('livewire-ui-modal') 
 </body>
 
 </html>

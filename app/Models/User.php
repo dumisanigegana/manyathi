@@ -7,16 +7,16 @@ use App\Support\HasAdvancedFilter;
 use Carbon\Carbon;
 use Hash;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+// use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use OwenIt\Auditing\Contracts\Auditable;
+use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
 
-class User extends Authenticatable
+class User extends Authenticatable  implements AuditableContract
 {
-    use HasFactory;
+    // use HasFactory;
     use HasAdvancedFilter;
     use SoftDeletes;
     use Notifiable;
@@ -26,14 +26,20 @@ class User extends Authenticatable
 
     public $orderable = [
         'id',
-        'name',
+        'uname',
+        'fname',
+        'mname',
+        'lname',
         'email',
         'email_verified_at',
     ];
 
     public $filterable = [
         'id',
-        'name',
+        'uname',
+        'fname',
+        'mname',
+        'lname',
         'email',
         'email_verified_at',
         'roles.title',
@@ -45,7 +51,10 @@ class User extends Authenticatable
     ];
 
     protected $fillable = [
-        'name',
+        'uname',
+        'fname',
+        'mname',
+        'lname',
         'email',
         'password',
     ];
@@ -60,6 +69,16 @@ class User extends Authenticatable
     public function getIsAdminAttribute()
     {
         return $this->roles()->where('title', 'Admin')->exists();
+    }
+
+    public function getFullnameAttribute()
+    {
+        return $this->fname. ' ' . $this->mnames . ' ' . $this->lname;
+    }
+
+    public function getUsernameAttribute()
+    {
+        return $this->subscriber->account;
     }
 
     public function getEmailVerifiedAtAttribute($value)
@@ -79,14 +98,26 @@ class User extends Authenticatable
         }
     }
     
-    public function subscribers()
+    public function subscriber()
     {
-        return $this->has(Subscriber::class);
+        return $this->hasOne(Subscriber::class);
     }
 
     public function roles()
     {
         return $this->belongsToMany(Role::class);
+    }
+
+    public function hasRole($name)
+    {
+        foreach ($this->roles()->get() as $role)
+        {
+            if ($role->title == 'Admin')
+            {
+                return true;
+            }
+        }
+        return false;        
     }
 
     protected function serializeDate(DateTimeInterface $date)

@@ -15,9 +15,10 @@ class CreateSubscriberSubphaseTable extends Migration
     {
         Schema::create('subscriber_subphase', function (Blueprint $table) {
             $table->id();
-            $table->foreign('subscriber_id');
-            $table->foreign('subphase_id');
+            $table->foreignId('subscriber_id');
+            $table->foreignId('subphase_id');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

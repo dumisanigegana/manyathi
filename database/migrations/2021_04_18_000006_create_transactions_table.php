@@ -16,4 +16,14 @@ class CreateTransactionsTable extends Migration
             $table->softDeletes();
         });
     }
+       
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('transactions');
+    }
 }

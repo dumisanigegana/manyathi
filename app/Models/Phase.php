@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use \DateTimeInterface;
+use App\Support\HasAdvancedFilter;
+// use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use OwenIt\Auditing\Contracts\Auditable;
+use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Phase extends Model
+class Phase extends Model implements AuditableContract
 {    
     use SoftDeletes;
     use \OwenIt\Auditing\Auditable;
@@ -16,16 +18,16 @@ class Phase extends Model
 
     public $orderable = [
         'id',
-        'phase',
+        'name',
     ];
 
     public $filterable = [
         'id',
-        'phase',
+        'name',
     ];
 
     protected $fillable = [
-        'phase',
+        'name',
         'description'
     ];
 

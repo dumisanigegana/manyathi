@@ -13,4 +13,14 @@ class AddRelationshipFieldsToContactContactsTable extends Migration
             $table->foreign('company_id', 'company_fk_3707298')->references('id')->on('contact_companies');
         });
     }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('contact_contacts');
+    }
 }

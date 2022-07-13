@@ -2,11 +2,14 @@
 
 namespace App\Models;
 
+use \DateTimeInterface;
+use App\Support\HasAdvancedFilter;
 use Illuminate\Database\Eloquent\Model;
-use OwenIt\Auditing\Contracts\Auditable;
+use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Carbon\Carbon;
 
-class Subscriber extends Model
+class Subscriber extends Model implements AuditableContract
 {
     use SoftDeletes;
     use \OwenIt\Auditing\Auditable;
@@ -14,15 +17,15 @@ class Subscriber extends Model
     public $table = 'subscribers';
 
     public $orderable = [
-        'account', 'user_id', 'dob', 'address', 'city', 'country', 'code', 'cell', 'identity', 'parent_id', 'subphase_id'
+        'account', 'user_id', 'dob', 'address', 'gender', 'city', 'country', 'code', 'cell', 'identity', 'referee_id', 'subphase_id'
     ];
 
     public $filterable = [
-        'account', 'user_id', 'dob', 'address', 'city', 'country', 'code', 'cell', 'identity', 'parent_id', 'subphase_id'
+        'account', 'user_id', 'dob', 'address', 'gender', 'city', 'country', 'code', 'cell', 'identity', 'referee_id', 'subphase_id'
     ];
 
     protected $fillable = [
-        'account', 'user_id', 'dob', 'address', 'city', 'country', 'code', 'cell', 'identity', 'parent_id', 'subphase_id'
+        'account', 'user_id', 'dob', 'address', 'gender', 'city', 'country', 'code', 'cell', 'identity', 'avatar', 'referee_id', 'subphase_id'
     ];
 
     protected $dates = [
@@ -42,18 +45,24 @@ class Subscriber extends Model
         return $this->belongsTo(Subphase::class);
     }
 
-    public function parent()
+    public function referee()
     {
-        return $this->belongsTo(Subsriber::class, 'parent_id');
+        return $this->belongsTo(Subscriber::class, 'referee_id');
     }
 
-    public function children()
+    public function desciples()
     {
-        return $this->hasMany(Subsriber::class, 'parent_id');
+        return $this->hasMany(Subscriber::class, 'referee_id');
     }
 
     protected function serializeDate(DateTimeInterface $date)
     {
         return $date->format('Y-m-d H:i:s');
     }
+
+    public function getBirthAttribute()
+    {
+        return Carbon::createFromFormat('Y-m-d', $this->attributes['dob'])->format('d/m/Y');
+    }
+
 }

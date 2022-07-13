@@ -2,11 +2,13 @@
 
 namespace App\Models;
 
+use \DateTimeInterface;
+use App\Support\HasAdvancedFilter;
 use Illuminate\Database\Eloquent\Model;
-use OwenIt\Auditing\Contracts\Auditable;
+use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Subphase extends Model
+class Subphase extends Model implements AuditableContract
 {   
     use SoftDeletes;
     use \OwenIt\Auditing\Auditable;
@@ -15,16 +17,16 @@ class Subphase extends Model
 
     public $orderable = [
         'id',
-        'phase',
+        'name',
     ];
 
     public $filterable = [
         'id',
-        'phase',
+        'name',
     ];
 
     protected $fillable = [
-        'phase',
+        'name',
         'description'
     ];
 

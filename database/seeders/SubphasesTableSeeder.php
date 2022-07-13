@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Subphases;
+use App\Models\Subphase;
 use Illuminate\Database\Seeder;
 
 class SubphasesTableSeeder extends Seeder
@@ -13,17 +13,17 @@ class SubphasesTableSeeder extends Seeder
             [
                 'id'    => 1,
                 'phase_id' => 1,
-                'phase' => 'Admin',
+                'name' => 'Admin',
                 'description' => ''
             ],
             [
                 'id'    => 2,
                 'phase_id' => 1,
-                'phase' => 'User',
+                'name' => 'User',
                 'description' => ''
             ],
         ];
 
-        Phase::insert($subphases);
+        Subphase::insert($subphases);
     }
 }
