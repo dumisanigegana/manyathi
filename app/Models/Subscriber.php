@@ -32,8 +32,10 @@ class Subscriber extends Model implements AuditableContract
         'created_at',
         'updated_at',
         'deleted_at',
-        'dob'
     ];
+    protected $casts = [
+        'dob ' => 'Y-m-d',
+      ];
 
     public function user()
     {

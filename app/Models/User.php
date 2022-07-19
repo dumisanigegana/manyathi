@@ -112,7 +112,8 @@ class User extends Authenticatable  implements AuditableContract
     {
         foreach ($this->roles()->get() as $role)
         {
-            if ($role->title == 'Admin')
+            //if ($role->title == 'Admin')
+            if ($role->title == $name)
             {
                 return true;
             }
@@ -123,5 +124,35 @@ class User extends Authenticatable  implements AuditableContract
     protected function serializeDate(DateTimeInterface $date)
     {
         return $date->format('Y-m-d H:i:s');
+    }
+
+     /**
+     * Enter your own logic (e.g. if ($this->id === 1) to
+     *   enable this user to be able to add/edit blog posts
+     *
+     * @return bool - true = they can edit / manage blog posts,
+     *        false = they have no access to the blog admin panel
+     */
+    public function canManageBinshopsBlogPosts()
+    {
+        // Enter the logic needed for your app.
+        // Maybe you can just hardcode in a user id that you
+        //   know is always an admin ID?
+
+        // if (       $this->id === 1
+        //      && $this->email === "admin@admin.com"
+        //    ){
+        if ($this->hasRole('Admin')) {
+
+           // return true so this user CAN edit/post/delete
+           // blog posts (and post any HTML/JS)
+
+           return true;
+        }
+
+        // otherwise return false, so they have no access
+        // to the admin panel (but can still view posts)
+
+        return false;
     }
 }

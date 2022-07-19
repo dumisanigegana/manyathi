@@ -3,7 +3,11 @@ const colors = require('tailwindcss/colors')
 module.exports = {
   purge: {
     enabled: true,
-    content: ['./resources/views/**/*.blade.php'],
+    content: [
+      "./resources/**/*.blade.php",
+      "./resources/**/*.js",
+      "./resources/**/*.vue",
+  ],
     options: {
       whitelist: []
     }

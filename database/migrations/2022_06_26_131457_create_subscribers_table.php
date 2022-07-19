@@ -24,10 +24,9 @@ class CreateSubscribersTable extends Migration
             $table->string('city');
             $table->string('gender');
             $table->string('country');
-            $table->string('code');
             $table->string('cell');
             $table->string('identity');
-            $table->string('avatar')->nullable();
+            $table->string('avatar')->unique()->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

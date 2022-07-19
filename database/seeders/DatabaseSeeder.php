@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
             PhasesTableSeeder::class,
             SubphasesTableSeeder::class,
             SubscribersTableSeeder::class,
+            CountriesTableSeeder::class,
         ]);
     }
 }

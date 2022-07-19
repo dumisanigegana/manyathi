@@ -48,7 +48,7 @@
             </div>
             <div class="flex items-center mx-auto my-1">
                 <button class="border-2 mx-auto border-purple-400 text-purple-400 hover:bg-purple-400 hover:text-white font-bold py-1 my-1 px-4 rounded">Edit your details</button> 
-            </div> 
+            </div>             
         </div>
     </x-slot>
 

@@ -17,6 +17,9 @@ Auth::routes(['register' => false]);
 
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/dash', [DashboardController::class, 'index'])->name('dash');
+    Route::get('/update', [DashboardController::class, 'edit']);
+    Route::put('/update', [DashboardController::class, 'update'])->name('prof_update');
+    Route::post('/pic', [DashboardController::class, 'pic'])->name('pic');
 
     Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['admin']], function () {
         

@@ -12,8 +12,34 @@
         @livewireStyles
         <script src="{{ asset('js/app.js') }}" defer></script>
         {{-- <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script> --}}
+        <style>
+            [x-cloak] {
+                display: none;
+            }
+    
+            .duration-300 {
+                transition-duration: 300ms;
+            }
+    
+            .ease-in {
+                transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
+            }
+    
+            .ease-out {
+                transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
+            }
+    
+            .scale-90 {
+                transform: scale(.9);
+            }
+    
+            .scale-100 {
+                transform: scale(1);
+            }
+        </style>
     </head>
     <body class="bg-gradient-to-r from-purple-200 to-blue-200">
+        @include('sweetalert::alert')
         <div x-data="{ open: false }"
             class="flex flex-row px-2 mb-8 bg-gradient-to-r from-purple-200 to-blue-200 fixed top-0 left-0 right-0 mx-auto md:items-center justify-between md:flex-row md:px-6 lg:px-8 max-w-7xl">
             <div class="p-2 flex flex-row items-center justify-between">
@@ -31,8 +57,8 @@
                     class="flex-col flex-grow pb-4 md:pb-0 hidden md:flex md:justify-end md:flex-row">
                         <div @click.away="open = false" class="relative" x-data="{ open: false }">
                             <button @click="open = !open"
-                                class="flex flex-row items-center text-blue-800 space-x-2 w-full px-4 py-2 mt-2 text-sm font-semibold text-left bg-transparent hover:bg-blue-800 md:w-auto md:inline md:mt-0 md:ml-4 hover:bg-gray-200 focus:bg-blue-800 focus:outline-none focus:shadow-outline">
-                                <span>Jane Doe</span>
+                                class="flex flex-row items-center text-purple-400 space-x-2 w-full px-4 py-2 mt-2 text-sm font-semibold text-left bg-transparent hover:bg-purple-200 md:w-auto md:inline md:mt-0 md:ml-4 hover:bg-gray-200 focus:bg-purple-500 focus:outline-none focus:shadow-outline">
+                                <span>{{ auth()->user()->lname }}</span>
                                 <img class="inline h-6 rounded-full"
                                     src="https://avatars2.githubusercontent.com/u/24622175?s=60&amp;v=4">
                                 <svg fill="currentColor" viewBox="0 0 20 20" :class="{'rotate-180': open, 'rotate-0': !open}"
@@ -48,7 +74,7 @@
                                 x-transition:leave="transition ease-in duration-75"
                                 x-transition:leave-start="transform opacity-100 scale-100"
                                 x-transition:leave-end="transform opacity-0 scale-95"
-                                class="absolute right-0 w-full mt-2 origin-top-right rounded-md shadow-lg md:w-48">
+                                class="absolute right-0 w-full mt-2 origin-top-right rounded-md shadow-lg md:w-48" x-cloak>
                                 <div class="py-2 bg-white text-blue-800 text-sm rounded-sm border border-main-color shadow-sm">
                                     <a class="block px-4 py-2 mt-2 text-sm bg-white md:mt-0 focus:text-gray-900 hover:bg-indigo-100 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
                                         href="#">Settings</a>
@@ -95,9 +121,8 @@
         <!-- End of Navbar -->
 
         <div class="container mx-auto my-5 p-5 bg-gradient-to-r from-purple-100 to-blue-100 ">
-            @yield('content')
-            
-        @livewire('livewire-ui-modal')   
+            @yield('content')       
+        
         </div>
     
         <form id="logoutform" action="{{ route('logout') }}" method="POST" style="display: none;">

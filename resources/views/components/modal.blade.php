@@ -1,26 +1,16 @@
-@props(['formAction' => false])
+<div
+    x-data="{
+        show: @entangle($attributes->wire('model')).defer
+    }"
+    x-show="show"
+    x-on:keydown.escape.window="show = false"
+    class="fixed inset-0 overflow-y-auto px-4 py-6 md:py-24 sm:px-0 z-40"
+>
+    <div x-show="show" class="fixed inset-0 transform" x-on:click="show = false">
+        <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
+    </div>
 
-<div class="w-auto">
-    @if($formAction)
-        <form wire:submit.prevent="{{ $formAction }}">
-    @endif
-            <div class="bg-white p-4 sm:px-6 sm:py-4 border-b border-gray-150">
-                @if(isset($title))
-                    <h3 class="text-lg leading-6 font-medium text-gray-900">
-                        {{ $title }}
-                    </h3>
-                @endif
-            </div>
-            <div class="bg-white px-4 sm:p-6">
-                <div class="space-y-6">
-                    {{ $content }}
-                </div>
-            </div>
-
-            <div class="bg-white px-4 pb-5 sm:px-4 sm:flex">
-                {{ $buttons }}
-            </div>
-    @if($formAction)
-        </form>
-    @endif
+    <div x-show="show" class="bg-white rounded-lg overflow-hidden transform sm:w-full sm:mx-auto max-w-lg">
+        {{ $slot }}
+    </div>
 </div>

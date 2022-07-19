@@ -19,8 +19,7 @@ class SubscribersTableSeeder extends Seeder
                  'gender'       => 'Female',
                  'city'       => 'Bulawayo',
                  'country'    => 'Zimbabwe',
-                 'code'   => '+263',
-                 'cell'      => 98,
+                 'cell'      => '+26398',
                  'identity'     => '908'
             ],
         ];
