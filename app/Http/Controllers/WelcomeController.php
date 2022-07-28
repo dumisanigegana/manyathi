@@ -2,28 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;  
-use App\Models\Country;  
-use App\Models\Subscriber; 
+// use App\Models\User;  
+// use App\Models\Country;  
+// use App\Models\Subscriber; 
 use Illuminate\Http\Request; 
 use Illuminate\Support\Facades\Validator;
-// use Illuminate\Validation\Validator;
 Use Alert;
 use Auth;
 
-class DashboardController
+class WelcomeController
 {
-    public function index()
+    public function book()
     {
-        $subscriber = Auth::user()->subscriber;
-        $countries = Country::pluck('nicename');
-        return view('profile', ['subscriber' => $subscriber, 'countries' => $countries]);
+       
+        return view('front.book');
     }
 
     public function edit()
     {
         $subscriber = Auth::user()->subscriber;
-        $countries = Country::all();
+        $countries = Country::pluck('nicename');
         return view('front.edit-profile', ['subscriber' => $subscriber, 'countries' => $countries]);
     }
 
@@ -37,8 +35,7 @@ class DashboardController
             'country' => 'required|min:3|max:255',
             'city' => 'required|max:255',
             'address' => 'required|min:6|max:255',
-            'cell' => 'required|phone:cell_country,mobile',
-            'cell_country ' => 'required_with:cell',
+            'cell' => 'required|min:5|max:255',
             'avatar' => 'file|mimes:jpg, png, jpeg, gif, svg|max:2048'
         ], 
         [
@@ -53,40 +50,40 @@ class DashboardController
             'avatar.max' => 'Image file is too long',
         ]);
 
-        if($request['avatar']) { 
-            $file = $request->file('avatar'); 
-            $name = $file->hashName(); // Generate a unique, random name...
-            $extension = $file->extension(); // Determine the file's extension based on the file's MIME type...              
-            $fileName = Auth::user()->subscriber->account . "." . $extension;
-            $filePath =  $request->file('avatar')->storeAs('avatars', $fileName, 'public');
-            $file_path = '/storage/' . $filePath;
-            // dd($extension);
+            if($request['avatar']) { 
+                $file = $request->file('avatar'); 
+                $name = $file->hashName(); // Generate a unique, random name...
+                $extension = $file->extension(); // Determine the file's extension based on the file's MIME type...              
+                $fileName = Auth::user()->subscriber->account . "." . $extension;
+                $filePath =  $request->file('avatar')->storeAs('avatars', $fileName, 'public');
+                $file_path = '/storage/' . $filePath;
+                // dd($extension);
 
-            Subscriber::findOrFail(Auth::user()->subscriber->id)
-                        ->update(['avatar' => $file_path]);
-        }
-    
-        $user = Auth::user();        
-        // $user = User::findOrFail(Auth::user()->id);        
-        $user->fname = $request['fname'];
-        $user->mnames = $request['mnames'];
-        $user->lname = $request['lname'];
+                Subscriber::findOrFail(Auth::user()->subscriber->id)
+                          ->update(['avatar' => $file_path]);
+            }
+       
+            $user = Auth::user();        
+            // $user = User::findOrFail(Auth::user()->id);        
+            $user->fname = $request['fname'];
+            $user->mnames = $request['mnames'];
+            $user->lname = $request['lname'];
+                
+            $user->save();
             
-        $user->save();
-        
 
-        $subscriber = Auth::user()->subscriber;
-        // $subscriber = Subscriber::findOrFail(Auth::user()->subscriber->id);
-        $subscriber->dob = $request['dob'];
-        $subscriber->gender = $request['gender'];
-        $subscriber->country = $request['country'];
-        $subscriber->city = $request['city'];
-        $subscriber->address = $request['address'];
-        $subscriber->cell = $request['cell'];
-        $subscriber->save();
-    
-        Alert::success('Submited', 'Profile updated')->showConfirmButton('Ok', '#00FA9A');
-        return redirect()->action([DashboardController::class, 'index']);
+            $subscriber = Auth::user()->subscriber;
+            // $subscriber = Subscriber::findOrFail(Auth::user()->subscriber->id);
+            $subscriber->dob = $request['dob'];
+            $subscriber->gender = $request['gender'];
+            $subscriber->country = $request['country'];
+            $subscriber->city = $request['city'];
+            $subscriber->address = $request['address'];
+            $subscriber->cell = $request['cell'];
+            $subscriber->save();
+       
+            Alert::success('Submited', 'Profile updated');
+            return redirect()->action([DashboardController::class, 'index']);
         
     }
 
@@ -109,11 +106,11 @@ class DashboardController
                             Alert::success('Submited', 'Profile picture Changed');
                     return redirect()->back();
                 } else {
-                    Alert::error('Failed', 'You can only upload a svg, png, jpg or gif file.')->showConfirmButton('Ok', '#00FA9A');  
+                    Alert::error('Failed', 'You can only upload a svg, png, jpg or gif file.');  
                     return back();                   
                 }
             } else {
-                Alert::error('Failed', 'You can only upload a file less than 2MB.')->showConfirmButton('Ok', '#00FA9A');   
+                Alert::error('Failed', 'You can only upload a file less than 2MB.');   
                 return back();              
             }            
         }       

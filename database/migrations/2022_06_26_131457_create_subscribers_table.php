@@ -15,7 +15,6 @@ class CreateSubscribersTable extends Migration
     {
         Schema::create('subscribers', function (Blueprint $table) {
             $table->id();
-            $table->integer('account')->unique();
             $table->foreignId('user_id');
             $table->foreignId('subphase_id')->default(1);
             $table->foreignId('referee_id')->default(1);

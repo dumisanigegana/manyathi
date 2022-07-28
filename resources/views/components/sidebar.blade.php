@@ -73,31 +73,12 @@
                 @endcan
                 @can('blog_admin_access')
                     <li class="items-center">
-                        <a class="has-sub {{ request()->is("admin/contact-companies*")||request()->is("admin/contact-contacts*") ? "sidebar-nav-active" : "sidebar-nav" }}" href="#" onclick="window.openSubNav(this)">
+                        <a class="has-sub {{ request()->is("admin/contact-companies*")||request()->is("admin/contact-contacts*") ? "sidebar-nav-active" : "sidebar-nav" }}" href="{{url('blog_admin')}}" onclick="window.openSubNav(this)">
                             <i class="fa-fw fas fa-users c-sidebar-nav-icon">
                             </i>
-                            {{ trans('cruds.contactManagement.title') }}
+                            Blog Admin
                         </a>
-                        <ul class="ml-4 subnav hidden">
-                            @can('contact_company_access')
-                                <li class="items-center">
-                                    <a class="{{ request()->is("admin/contact-companies*") ? "sidebar-nav-active" : "sidebar-nav" }}" href="{{ route("admin.contact-companies.index") }}">
-                                        <i class="fa-fw c-sidebar-nav-icon fas fa-building">
-                                        </i>
-                                        {{ trans('cruds.contactCompany.title') }}
-                                    </a>
-                                </li>
-                            @endcan
-                            @can('contact_contact_access')
-                                <li class="items-center">
-                                    <a class="{{ request()->is("admin/contact-contacts*") ? "sidebar-nav-active" : "sidebar-nav" }}" href="{{ route("admin.contact-contacts.index") }}">
-                                        <i class="fa-fw c-sidebar-nav-icon fas fa-user-plus">
-                                        </i>
-                                        {{ trans('cruds.contactContact.title') }}
-                                    </a>
-                                </li>
-                            @endcan
-                        </ul>
+                        
                     </li>
                 @endcan
                 {{-- @can('contact_management_access')

@@ -17,13 +17,13 @@
         </label>  	                    
         <input 
             type="file" name="avatar" required
-            class="block mb-5 w-full text-lg text-gray-800 bg-purple-100 rounded-lg border border-green-600 cursor-pointer focus:outline-none" 
+            class="block my-3 w-full text-lg text-gray-800 bg-green-100 rounded-lg cursor-pointer focus:outline-none" 
             id="chooseFile"
         >
     </div>
 
     <!--Footer-->
     <div class="flex justify-end pt-2">
-        <button type="submit" class="border-2 border-purple-400 text-purple-400 hover:bg-purple-400 hover:text-white font-bold py-1 my-1 px-4 rounded" >Submit</button>
+        <button type="submit" class="border-2 border-green-400 text-green-400 hover:bg-green-400 hover:text-white font-bold py-1 my-1 px-4 rounded" >Submit</button>
     </div>
 </form>

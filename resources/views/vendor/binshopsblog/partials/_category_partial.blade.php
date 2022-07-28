@@ -4,7 +4,7 @@
         <li class="category-item-wrapper">
             @php $nameChain = $nameChain .'/'. $trans->slug @endphp
 
-            <a href="{{route("binshopsblog.view_category",[$locale, $nameChain ])}}">
+            <a href="{{route("binshopsblog.search",[$locale, $nameChain ])}}">
                  <span class="category-item" value='{{$category->category_id}}'>
         {{$trans->category_name}}
 

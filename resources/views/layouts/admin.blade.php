@@ -7,7 +7,7 @@
     <meta name="theme-color" content="#000000" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
     <link rel="stylesheet" href="{{ asset('css/app.css') }}" />
-    <title>{{ trans('panel.site_title') }}</title>
+    <title>Demo</title>
     @livewireStyles
 </head>
 
@@ -19,7 +19,7 @@
         <x-sidebar />
 
         <div class="relative md:ml-64 bg-gray-100 pb-12 min-h-screen">
-            <div class="relative bg-pink-600 md:pt-32 pb-32 pt-12"></div>
+            <div class="relative bg-blue-600 md:pt-32 pb-32 pt-12"></div>
 
             <div class="relative px-4 md:px-10 mx-auto w-full min-h-full -m-48">
                 @yield('content')

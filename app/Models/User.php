@@ -30,6 +30,7 @@ class User extends Authenticatable  implements AuditableContract
         'fname',
         'mname',
         'lname',
+        'username',
         'email',
         'email_verified_at',
     ];
@@ -40,6 +41,7 @@ class User extends Authenticatable  implements AuditableContract
         'fname',
         'mname',
         'lname',
+        'username',
         'email',
         'email_verified_at',
         'roles.title',
@@ -55,6 +57,7 @@ class User extends Authenticatable  implements AuditableContract
         'fname',
         'mname',
         'lname',
+        'username',
         'email',
         'password',
     ];
@@ -76,10 +79,17 @@ class User extends Authenticatable  implements AuditableContract
         return $this->fname. ' ' . $this->mnames . ' ' . $this->lname;
     }
 
-    public function getUsernameAttribute()
+    public function account(): Attribute
     {
-        return $this->subscriber->account;
+        return Attribute::make(
+            get: fn ($value) => ucfirst($value),
+        );
     }
+
+    // public function setUsernameAttribute()
+    // {
+    //     $this->attributes['username'] = $this->subscriber->account;
+    // }
 
     public function getEmailVerifiedAtAttribute($value)
     {

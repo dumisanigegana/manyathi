@@ -98,7 +98,7 @@
                                 <select name="country" class="shadow block appearance-none border rounded w-full py-2 pl-3 pr-5 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                                     <option disabled>Select... </option>
                                     @foreach($countries as $country)
-                                        <option value="{{ $country}}" @if(old('country') == $subscriber->country) selected @endif>{{ $country }}</option>
+                                        <option value="{{ $country->nicename}}" @if(old('country') == $subscriber->country->nicename) selected @endif>{{ $country->nicename }}</option>
                                     @endforeach
                                 </select>
                             </div> 
@@ -157,12 +157,12 @@
                         @error('avatar') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                         <input 
                             type="file" name="avatar" 
-                            class="block mb-5 w-full text-lg text-gray-800 bg-purple-100 rounded-lg border border-green-600 cursor-pointer focus:outline-none" 
+                            class="block mb-5 w-full text-lg text-gray-800 bg-green-100 rounded-lg border border-green-600 cursor-pointer focus:outline-none" 
                             id="chooseFile"
                         >
                     </div>
                     <div class="bg-white px-4 pb-4 sm:px-4 sm:flex">        
-                        <button type="submit" class="border-2 mx-auto border-purple-400 text-purple-400 hover:bg-purple-400 hover:text-white font-bold py-1 my-1 px-4 rounded">Submit</button> 
+                        <button type="submit" class="border-2 mx-auto border-green-400 text-green-400 hover:bg-green-400 hover:text-white font-bold py-1 my-1 px-4 rounded">Submit</button> 
                     </div>
                 </form>
                 </div>            

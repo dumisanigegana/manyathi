@@ -38,10 +38,10 @@
             }
         </style>
     </head>
-    <body class="bg-gradient-to-r from-purple-200 to-blue-200">
+    <body class="bg-gradient-to-r from-green-200 to-blue-200">
         @include('sweetalert::alert')
         <div x-data="{ open: false }"
-            class="flex flex-row px-2 mb-8 bg-gradient-to-r from-purple-200 to-blue-200 fixed top-0 left-0 right-0 mx-auto md:items-center justify-between md:flex-row md:px-6 lg:px-8 max-w-7xl">
+            class="flex flex-row px-2 mb-8 bg-gradient-to-r from-green-200 to-blue-200 fixed top-0 left-0 right-0 mx-auto md:items-center justify-between md:flex-row md:px-6 lg:px-8 max-w-7xl">
             <div class="p-2 flex flex-row items-center justify-between">
                 <a href="#" class="text-lg font-semibold tracking-widest uppercase rounded-lg focus:outline-none focus:shadow-outline">
                     <span class="text-2xl font-extrabold text-blue-600">Logo</span>
@@ -49,18 +49,19 @@
             </div>
             <div class="flex items-center space-x-1">
                 <ul class="hidden space-x-2 md:inline-flex">
-                    <li><a href="#" class="px-4 py-2 font-semibold text-gray-600 rounded">Home</a></li>
+                   @guest <li><a href="{{ route('login') }}" class="px-4 py-2 font-semibold text-gray-600 rounded">Login</a></li>@endguest
                     <li><a href="#" class="px-4 py-2 font-semibold text-gray-600 rounded">Blogs</a></li>
-                    <li><a href="#" class="px-4 py-2 font-semibold text-gray-600 rounded">About Us</a></li>
-                    <li><a href="{{ route('admin.home') }}" class="px-4 py-2 font-bold text-red-600 rounded">Administration</a></li>
+                    <li><a href="{{ route('register') }}" class="px-4 py-2 font-semibold text-gray-600 rounded">Register</a></li>
+                    @can('admin_access')<li><a href="{{ route('admin.home') }}" class="px-4 py-2 font-bold text-red-600 rounded">Administration</a></li>@endcan
                     <nav :class="{'flex': open, 'hidden': !open}"
                     class="flex-col flex-grow pb-4 md:pb-0 hidden md:flex md:justify-end md:flex-row">
                         <div @click.away="open = false" class="relative" x-data="{ open: false }">
                             <button @click="open = !open"
-                                class="flex flex-row items-center text-purple-400 space-x-2 w-full px-4 py-2 mt-2 text-sm font-semibold text-left bg-transparent hover:bg-purple-200 md:w-auto md:inline md:mt-0 md:ml-4 hover:bg-gray-200 focus:bg-purple-500 focus:outline-none focus:shadow-outline">
-                                <span>{{ auth()->user()->lname }}</span>
+                                class="flex flex-row items-center text-green-600 space-x-2 w-full px-4 py-2 mt-2 text-sm font-semibold text-left bg-transparent hover:bg-green-200 md:w-auto md:inline md:mt-0 md:ml-4 hover:bg-gray-200 focus:text-white focus:bg-green-500 focus:outline-none focus:shadow-outline">
+                                @auth  <span>{{ auth()->user()->lname }}</span>@endauth
+                                @guest  <span>Guest</span>@endguest
                                 <img class="inline h-6 rounded-full"
-                                    src="https://avatars2.githubusercontent.com/u/24622175?s=60&amp;v=4">
+                                    src="{{URL::asset('/img/avatar.jpg')}}">
                                 <svg fill="currentColor" viewBox="0 0 20 20" :class="{'rotate-180': open, 'rotate-0': !open}"
                                     class="inline w-4 h-4 transition-transform duration-200 transform">
                                     <path fill-rule="evenodd"
@@ -76,13 +77,13 @@
                                 x-transition:leave-end="transform opacity-0 scale-95"
                                 class="absolute right-0 w-full mt-2 origin-top-right rounded-md shadow-lg md:w-48" x-cloak>
                                 <div class="py-2 bg-white text-blue-800 text-sm rounded-sm border border-main-color shadow-sm">
-                                    <a class="block px-4 py-2 mt-2 text-sm bg-white md:mt-0 focus:text-gray-900 hover:bg-indigo-100 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
-                                        href="#">Settings</a>
+                                   @auth <a class="block px-4 py-2 mt-2 text-sm bg-white md:mt-0 focus:text-gray-900 hover:bg-indigo-100 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                                        href="#">Settings</a>@endauth
                                     <a class="block px-4 py-2 mt-2 text-sm bg-white md:mt-0 focus:text-gray-900 hover:bg-indigo-100 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
                                         href="#">Help</a>
                                     <div class="border-b"></div>
-                                    <a class="block px-4 py-2 mt-2 text-sm bg-white md:mt-0 focus:text-gray-900 hover:bg-indigo-100 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
-                                    href="#" onclick="event.preventDefault(); document.getElementById('logoutform').submit();">Logout</a>
+                                    @auth<a class="block px-4 py-2 mt-2 text-sm bg-white md:mt-0 focus:text-gray-900 hover:bg-indigo-100 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                                    href="#" onclick="event.preventDefault(); document.getElementById('logoutform').submit();">Logout</a>@endauth
                                 </div>
                             </div>
                         </div>
@@ -120,7 +121,7 @@
         </div>
         <!-- End of Navbar -->
 
-        <div class="container mx-auto my-5 p-5 bg-gradient-to-r from-purple-100 to-blue-100 ">
+        <div class="container mx-auto my-5 px-5 pb-5 pt-12 bg-gradient-to-r from-green-100 to-blue-100 ">
             @yield('content')       
         
         </div>

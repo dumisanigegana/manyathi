@@ -12,7 +12,6 @@ class SubscribersTableSeeder extends Seeder
         $subscribers = [
             [
                 'id'             => 1,
-                'account'        => 1 ,
                  'user_id'      => 1,
                  'dob'   => "2001/01/01",
                  'address'       => 'no',

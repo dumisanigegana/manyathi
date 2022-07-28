@@ -24,6 +24,7 @@
         "laravel/ui": "^3.2",
         "livewire/livewire": "^2.3",
         "owen-it/laravel-auditing": "^13.0",
+        "propaganistas/laravel-phone": "^4.3",
         "qcod/laravel-gamify": "^1.0",
         "realrashid/sweet-alert": "^5.1",
         "wire-elements/modal": "^1.0"

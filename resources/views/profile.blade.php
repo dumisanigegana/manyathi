@@ -101,14 +101,14 @@
                     <div class="grid grid-cols-2">
                         <div class="px-4 py-2 font-semibold">Date of birth</div>
                         <div class="px-4 py-2">{{ $subscriber->birth }}</div>
-                    </div>
+                    </div>                    
                 </div>
                 <!-- modal div -->
                 <div class="flex items-center mx-auto my-1">
                     <!-- Button (blue), duh! -->
-                    <button type="button" class="border-2 mx-auto border-purple-400 text-purple-400 hover:bg-purple-400 hover:text-white font-bold py-1 my-1 px-4 rounded">
+                    <button type="button" class="border-2 mx-auto border-green-400 text-green-400 hover:bg-green-400 hover:text-white font-bold py-1 my-1 px-4 rounded">
                         <a  href="{{ url('/update') }}" >Edit your details </a></button> 
-                    {{-- <button @click="open = true" class="border-2 mx-auto border-purple-400 text-purple-400 hover:bg-purple-400 hover:text-white font-bold py-1 my-1 px-4 rounded">Edit your details</button>  --}}
+                    {{-- <button @click="open = true" class="border-2 mx-auto border-green-400 text-green-400 hover:bg-green-400 hover:text-white font-bold py-1 my-1 px-4 rounded">Edit your details</button>  --}}
                         <!--Overlay-->
                       
                   

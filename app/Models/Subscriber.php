@@ -17,15 +17,15 @@ class Subscriber extends Model implements AuditableContract
     public $table = 'subscribers';
 
     public $orderable = [
-        'account', 'user_id', 'dob', 'address', 'gender', 'city', 'country', 'code', 'cell', 'identity', 'referee_id', 'subphase_id'
+        'account', 'user_id', 'dob', 'address', 'gender', 'city', 'country', 'cell', 'identity', 'referee_id', 'subphase_id'
     ];
 
     public $filterable = [
-        'account', 'user_id', 'dob', 'address', 'gender', 'city', 'country', 'code', 'cell', 'identity', 'referee_id', 'subphase_id'
+        'account', 'user_id', 'dob', 'address', 'gender', 'city', 'country', 'cell', 'identity', 'referee_id', 'subphase_id'
     ];
 
     protected $fillable = [
-        'account', 'user_id', 'dob', 'address', 'gender', 'city', 'country', 'code', 'cell', 'identity', 'avatar', 'referee_id', 'subphase_id'
+        'account', 'user_id', 'dob', 'address', 'gender', 'city', 'country', 'cell', 'identity', 'avatar', 'referee_id', 'subphase_id'
     ];
 
     protected $dates = [
