@@ -12,14 +12,14 @@ class SubscribersTableSeeder extends Seeder
         $subscribers = [
             [
                 'id'             => 1,
-                 'user_id'      => 1,
-                 'dob'   => "2001/01/01",
-                 'address'       => 'no',
-                 'gender'       => 'Female',
-                 'city'       => 'Bulawayo',
-                 'country'    => 'Zimbabwe',
-                 'cell'      => '+26398',
-                 'identity'     => '908'
+                'user_id'      => 1,
+                'dob'   => "2001/01/01",
+                'address'       => 'no',
+                'gender'       => 'Female',
+                'city'       => 'Bulawayo',
+                'country'    => 'Zimbabwe',
+                'cell'      => '+26398',
+                'identity'     => '908'
             ],
         ];
 

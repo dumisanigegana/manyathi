@@ -7,27 +7,26 @@ use App\Support\HasAdvancedFilter;
 use Illuminate\Database\Eloquent\Model;
 use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Carbon\Carbon;
 
-class Subphase extends Model implements AuditableContract
-{   
+class Task extends Model implements AuditableContract
+{
+    use HasAdvancedFilter; 
     use SoftDeletes;
     use \OwenIt\Auditing\Auditable;
 
-    public $table = 'subphases';
+    public $table = 'tasks';
 
     public $orderable = [
-        'id',
-        'name',
+        'name', 'position', 'subphase_id'
     ];
 
     public $filterable = [
-        'id',
-        'name',
+        'name', 'position', 'subphase_id'
     ];
 
     protected $fillable = [
-        'name',
-        'description'
+        'name', 'position', 'subphase_id'
     ];
 
     protected $dates = [
@@ -35,25 +34,18 @@ class Subphase extends Model implements AuditableContract
         'updated_at',
         'deleted_at',
     ];
-   
-    protected function serializeDate(DateTimeInterface $date)
-    {
-        return $date->format('Y-m-d H:i:s');
-    }
-    
-    public function phase()
-    {
-        return $this->belongsTo(Phase::class);
-    }
+    protected $casts = [
+        'dob ' => 'Y-m-d',
+      ];
+
     
     public function subscribers()
     {
         return $this->hasMany(Subscriber::class);
     }
-
-    public function tasks()
+    
+    public function subphase()
     {
-        return $this->hasMany(Task::class);
+        return $this->belongsTo(Subphase::class);
     }
-
 }

@@ -51,7 +51,7 @@
                 <ul class="hidden space-x-2 md:inline-flex">
                    @guest <li><a href="{{ route('login') }}" class="px-4 py-2 font-semibold text-gray-600 rounded">Login</a></li>@endguest
                     <li><a href="#" class="px-4 py-2 font-semibold text-gray-600 rounded">Blogs</a></li>
-                    <li><a href="{{ route('register') }}" class="px-4 py-2 font-semibold text-gray-600 rounded">Register</a></li>
+                    @guest <li><a href="{{ route('register') }}" class="px-4 py-2 font-semibold text-gray-600 rounded">Register</a></li>@endguest
                     @can('admin_access')<li><a href="{{ route('admin.home') }}" class="px-4 py-2 font-bold text-red-600 rounded">Administration</a></li>@endcan
                     <nav :class="{'flex': open, 'hidden': !open}"
                     class="flex-col flex-grow pb-4 md:pb-0 hidden md:flex md:justify-end md:flex-row">

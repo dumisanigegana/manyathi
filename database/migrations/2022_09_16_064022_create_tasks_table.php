@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSubphasesTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,12 @@ class CreateSubphasesTable extends Migration
      */
     public function up()
     {
-        Schema::create('subphases', function (Blueprint $table) {
+        Schema::create('tasks', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('phase_id');            
-            $table->unsignedTinyInteger('possition');            
             $table->string('name')->unique();
-            $table->string('description');
+            $table->string('subphase_id');           
+            $table->unsignedTinyInteger('possition');   
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -31,6 +29,6 @@ class CreateSubphasesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('subphases');
+        Schema::dropIfExists('tasks');
     }
-}
+};

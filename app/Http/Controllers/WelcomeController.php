@@ -22,6 +22,7 @@ class WelcomeController
     {
         $subscriber = Auth::user()->subscriber;
         $countries = Country::pluck('nicename');
+        //dd($countries);
         return view('front.edit-profile', ['subscriber' => $subscriber, 'countries' => $countries]);
     }
 

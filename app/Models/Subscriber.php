@@ -11,6 +11,8 @@ use Carbon\Carbon;
 
 class Subscriber extends Model implements AuditableContract
 {
+    
+    use HasAdvancedFilter; 
     use SoftDeletes;
     use \OwenIt\Auditing\Auditable;
 
@@ -55,6 +57,11 @@ class Subscriber extends Model implements AuditableContract
     public function desciples()
     {
         return $this->hasMany(Subscriber::class, 'referee_id');
+    }
+
+    public function tasks()
+    {
+        return $this->hasMany(Task::class);
     }
 
     protected function serializeDate(DateTimeInterface $date)

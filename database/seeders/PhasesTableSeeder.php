@@ -12,12 +12,12 @@ class PhasesTableSeeder extends Seeder
         $phases = [
             [
                 'id'    => 1,
-                'name' => 'Admin',
+                'name' => 'One',
                 'description' => ''
             ],
             [
                 'id'    => 2,
-                'name' => 'User',
+                'name' => 'Celebration',
                 'description' => ''
             ],
         ];

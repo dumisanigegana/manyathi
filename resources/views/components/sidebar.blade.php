@@ -68,6 +68,15 @@
                                     </a>
                                 </li>
                             @endcan
+                            @can('subscriber_access')
+                                <li class="items-center">
+                                    <a class="{{ request()->is("admin/subscribers*") ? "sidebar-nav-active" : "sidebar-nav" }}" href="{{ route("admin.subscribers.index") }}">
+                                        <i class="fa-fw c-sidebar-nav-icon fas fa-subscriber">
+                                        </i>
+                                        {{ trans('cruds.subscriber.title') }}
+                                    </a>
+                                </li>
+                            @endcan
                         </ul>
                     </li>
                 @endcan

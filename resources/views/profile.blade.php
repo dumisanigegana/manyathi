@@ -4,7 +4,7 @@
     <!-- Left Side -->
     <div class="w-full md:w-3/12 md:mx-2 mt-3">
         <!-- Profile Card -->
-        <div class="bg-white p-3 border-t-4 border-green-400"  x-data="{ 'showModal': false }" @keydown.escape="showModal = false" x-cloak>
+        <div class="bg-white p-3 border-t-4 border-green-400"  x-data="{ 'showModal': false }" @keydown.escape="showModal = false" >
             <div class="image overflow-hidden"  @click="showModal = true">
                 @if ($subscriber->avatar)
                 <img class="h-auto w-full mx-auto"
@@ -19,7 +19,7 @@
              <!--Overlay-->
             <div class="overflow-auto" style="background-color: rgba(0,0,0,0.5)" x-show="showModal" :class="{ 'absolute inset-0 z-10 flex items-center justify-center': showModal }">
                 <!--Dialog-->
-                <div class="bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg py-4 text-left px-6" x-show="showModal" @click.away="showModal = false" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0 scale-90" x-transition:enter-end="opacity-100 scale-100" x-transition:leave="ease-in duration-300" x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90">
+                <div class="bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg py-4 text-left px-6" x-show="showModal" @click.away="showModal = false" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0 scale-90" x-transition:enter-end="opacity-100 scale-100" x-transition:leave="ease-in duration-10" x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90">
                     @include('front.pic')
                 </div>
                 <!--/Dialog -->
@@ -135,6 +135,7 @@
                         <span class="tracking-wide">Desciples</span>
                     </div>
                     <div class="list-inside flex flex-wrap p-4">
+					<!-- if exit statement -->
                         @foreach($subscriber->desciples as $desciple)
                         <div class="text-center basis-1/4 border-r-8 mb-4 border-white bg-gray-100 flex-item">
                             <div class="flex flex-col space-x-3 mt-1 items-center">
@@ -145,7 +146,7 @@
                                     <span  class="text-gray-800">{{ $desciple->user->fullname }}</span>
                                     <span class="bg-green-300 w-5 h-5 items-center text-xs text-gray-800 text-sm font-semibold inline-flex p-1.5 rounded-full mr-2">
                                         {{ $desciple->desciples->count() }}
-                                        </span> 
+                                    </span> 
                                 </div>
                             </div>
                         </div>

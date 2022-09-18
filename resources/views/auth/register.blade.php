@@ -5,7 +5,6 @@
     <h3 class="text-xl leading-6 text-center font-bold text-gray-900">
         Create an account.
     </h3>
-
    <div class="p-3">  
         <form  method="POST" action="{{ route('register_store') }}">
             @csrf
@@ -132,8 +131,7 @@
                             @error('country') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                         </div>
                     </div> 
-                </div>
-                
+                </div>                
                 <div class="bg-white mx-auto px-4 pb-4 sm:px-4 sm:flex">        
                     <button type="submit" class="border-2 mx-auto border-green-400 text-green-400 hover:bg-green-400 hover:text-white font-bold py-1 my-1 px-4 rounded">Submit</button> 
                 </div>

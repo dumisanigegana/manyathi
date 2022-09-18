@@ -18,6 +18,8 @@ class DatabaseSeeder extends Seeder
             SubphasesTableSeeder::class,
             SubscribersTableSeeder::class,
             CountriesTableSeeder::class,
+            TaskTableSeeder::class,
+            BinshopsLanguagesTableSeeder::class,
         ]);
     }
 }

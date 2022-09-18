@@ -120,23 +120,23 @@ class PermissionsTableSeeder extends Seeder
             ],
             [
                 'id'    => 28,
-                'title' => 'transaction_create',
+                'title' => 'subscriber_create',
             ],
             [
                 'id'    => 29,
-                'title' => 'transaction_edit',
+                'title' => 'subscriber_edit',
             ],
             [
                 'id'    => 30,
-                'title' => 'transaction_show',
+                'title' => 'subscriber_show',
             ],
             [
                 'id'    => 31,
-                'title' => 'transaction_delete',
+                'title' => 'subscriber_delete',
             ],
             [
                 'id'    => 32,
-                'title' => 'transaction_access',
+                'title' => 'subscriber_access',
             ],
             [
                 'id'    => 33,

@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\TransactionController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\SubscriberController;
 use App\Http\Controllers\Auth\RegisterController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -39,6 +40,7 @@ Route::group(['middleware' => ['auth']], function () {
 
         // Users
         Route::resource('users', UserController::class, ['except' => ['store', 'update', 'destroy']]);
+        Route::resource('subscribers', SubscriberController::class, ['except' => ['store', 'update', 'destroy']]);
 
         // Contact Company
         Route::resource('contact-companies', ContactCompanyController::class, ['except' => ['store', 'update', 'destroy']]);

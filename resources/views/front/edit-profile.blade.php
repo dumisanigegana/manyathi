@@ -4,7 +4,7 @@
 <!-- Left Side -->
 <div class="w-full md:w-3/12 md:mx-2 mt-3">
     <!-- Profile Card -->
-    <div class="bg-white p-3 border-t-4 border-green-400" x-data="{ 'showModal': false }" @keydown.escape="showModal = false" x-cloak>
+    <div class="bg-white p-3 border-t-4 border-green-400" x-data="{ 'showModal': false }" @keydown.escape="showModal = false" >
         <div class="image overflow-hidden" @click="showModal = true">
             @if ($subscriber->avatar)
             <img class="h-auto w-full mx-auto"
@@ -20,7 +20,7 @@
         <!--Overlay-->
 		<div class="overflow-auto" style="background-color: rgba(0,0,0,0.5)" x-show="showModal" :class="{ 'absolute inset-0 z-10 flex items-center justify-center': showModal }">
 			<!--Dialog-->
-			<div class="bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg py-4 text-left px-6" x-show="showModal" @click.away="showModal = false" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0 scale-90" x-transition:enter-end="opacity-100 scale-100" x-transition:leave="ease-in duration-300" x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90">
+			<div class="bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg py-4 text-left px-6" x-show="showModal" @click.away="showModal = false" x-transition:enter="ease-out duration-50" x-transition:enter-start="opacity-0 scale-90" x-transition:enter-end="opacity-100 scale-100" x-transition:leave="ease-in duration-100" x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90">
 				@include('front.pic')
 			</div>
 			<!--/Dialog -->
@@ -98,7 +98,7 @@
                                 <select name="country" class="shadow block appearance-none border rounded w-full py-2 pl-3 pr-5 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                                     <option disabled>Select... </option>
                                     @foreach($countries as $country)
-                                        <option value="{{ $country->nicename}}" @if(old('country') == $subscriber->country->nicename) selected @endif>{{ $country->nicename }}</option>
+                                        <option value="{{ $country}}" @if(old('country') == $subscriber->country) selected @endif>{{ $country}}</option>
                                     @endforeach
                                 </select>
                             </div> 

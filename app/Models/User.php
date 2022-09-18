@@ -26,7 +26,6 @@ class User extends Authenticatable  implements AuditableContract
 
     public $orderable = [
         'id',
-        'uname',
         'fname',
         'mname',
         'lname',
@@ -37,7 +36,6 @@ class User extends Authenticatable  implements AuditableContract
 
     public $filterable = [
         'id',
-        'uname',
         'fname',
         'mname',
         'lname',
@@ -53,7 +51,6 @@ class User extends Authenticatable  implements AuditableContract
     ];
 
     protected $fillable = [
-        'uname',
         'fname',
         'mname',
         'lname',

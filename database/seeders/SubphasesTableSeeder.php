@@ -14,12 +14,14 @@ class SubphasesTableSeeder extends Seeder
                 'id'    => 1,
                 'phase_id' => 1,
                 'name' => 'Admin',
+                'possition' => 1,
                 'description' => ''
             ],
             [
                 'id'    => 2,
                 'phase_id' => 1,
                 'name' => 'User',
+                'possition' => 2,
                 'description' => ''
             ],
         ];

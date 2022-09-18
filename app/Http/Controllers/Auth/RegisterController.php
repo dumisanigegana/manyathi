@@ -71,16 +71,19 @@ class RegisterController extends Controller
             'address' => 'required|min:6|max:255',
             'cell' => 'required|phone:cell_country,mobile',
             'cell_country ' => 'required_with:cell',
+            'captcha'    => 'required|captcha',
         ]);
 
         $len = Str::length($request['cell']);
         $cell = Str::substr($request['cell'], 1, $len - 1);
-         
+        
+        $last_user = User::latest()->first();
+        $account = $this->account($last_user->id);
         $user = User::create([
             'fname'     => $request['fname'],
             'mnames'     => $request['mnames'],
             'lname'     => $request['lname'],
-            'username'    => $this->account($user->id),
+            'username'    => $this->account($last_user->id),
             'email'    => $request['email'],
             'password' => Hash::make($request['password']),
         ]);
@@ -104,7 +107,7 @@ class RegisterController extends Controller
     
     public function account($uid)
     {        
-      $id = $uid;
+      $id = $uid + 1;
       $len = Str::length($id);
       $acc = Str::substr('1204302101', 0, 10-$len) . $id;            
 
@@ -121,7 +124,43 @@ class RegisterController extends Controller
 
     public function test($acc)
     {
-        return Subscriber::where('account', $acc)->exists();
+        return User::where('username', $acc)->exists();
     }
+
+    
+     // ================================================
+    /* method : refreshCaptcha
+    * @param  : 
+    * @Description : return captcha code
+    */// ==============================================
+    public function refreshCaptcha()
+    {
+        return response()->json([
+            'captcha' => Captcha::img()
+        ]);
+    }
+
+    // ================================================
+    /* method : validateCapture
+    * @param  : 
+    * @Description : return captcha code
+    */// ==============================================
+    public function validateCapture(Request $request)
+    {    
+        $validator = Validator::make($request->all(), [
+            'captcha'    => 'required|captcha',
+        ]);
+        //dd($validator->fails());
+        if ($validator->fails()) {
+            $valid = 'Invalid';
+            $class = "text-red-500";            
+        } else {
+            $valid = 'Valid';
+            $class = "text-green-500";
+        }
+        return response()->json(['valid' => $valid, 'class' => $class]);
+
+    }
+    
 
 }

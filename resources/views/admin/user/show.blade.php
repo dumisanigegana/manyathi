@@ -19,10 +19,10 @@
                 <tbody class="bg-white">
                     <tr>
                         <th>
-                            {{ trans('cruds.user.fields.id') }}
+                            Username
                         </th>
                         <td>
-                            {{ $user->id }}
+                            {{ $user->username }}
                         </td>
                     </tr>
                     <tr>
@@ -30,7 +30,7 @@
                             {{ trans('cruds.user.fields.name') }}
                         </th>
                         <td>
-                            {{ $user->name }}
+                            {{ $user->fullName }}
                         </td>
                     </tr>
                     <tr>

@@ -27,69 +27,65 @@
                 <th class="w-9">
                 </th>
                 <th class="w-28">
-                    {{-- trans('cruds.user.fields.username') --}}Username
-                    @include('components.table.sort', ['field' => 'username'])
+                    {{-- trans('cruds.subscriber.fields.subscribername') --}}Reference Number
+                    @include('components.table.sort', ['field' => 'account'])
                 </th>
                 <th>
-                    {{-- trans('cruds.user.fields.fullName') --}} Fullname
-                    @include('components.table.sort', ['field' => 'fullName'])
+                    {{-- trans('cruds.subscriber.fields.fullName') --}} Birthday
+                    @include('components.table.sort', ['field' => 'bod'])
                 </th>
                 <th>
-                    {{-- trans('cruds.user.fields.email') --}}Email
-                    @include('components.table.sort', ['field' => 'email'])
+                    {{-- trans('cruds.subscriber.fields.email') --}}city
+                    @include('components.table.sort', ['field' => 'city'])
                 </th>
                 <th>
-                    {{-- trans('cruds.user.fields.email_verified_at') --}} Email Verification
-                    @include('components.table.sort', ['field' => 'email_verified_at'])
+                    {{-- trans('cruds.subscriber.fields.email_verified_at') --}} Country
+                    @include('components.table.sort', ['field' => 'country'])
                 </th>
                 <th>
-                    {{-- trans('cruds.user.fields.roles') --}} Roles
+                    {{-- trans('cruds.subscriber.fields.roles') --}} Phase 
                 </th>
                 <th>
                 </th>
             </tr>
         </thead>
         <tbody>
-            @forelse($users as $user)
+            @forelse($subscribers as $subscriber)
                 <tr>
                     <td>
-                        <input type="checkbox" value="{{ $user->id }}" wire:model="selected">
+                        <input type="checkbox" value="{{ $subscriber->id }}" wire:model="selected">
                     </td>
                     <td>
-                        {{ $user->username }}
+                        {{ $subscriber->user->username }}
                     </td>
                     <td>
-                        {{ $user->fullName }}
+                        {{ $subscriber->dob }}
                     </td>
                     <td>
-                        <a class="link-light-blue" href="mailto:{{ $user->email }}">
-                            <i class="far fa-envelope fa-fw">
-                            </i>
-                            {{ $user->email }}
-                        </a>
+                        {{ $subscriber->city }}
                     </td>
                     <td>
-                        {{ $user->email_verified_at }}
+                        {{ $subscriber->country }}
                     </td>
                     <td>
-                        @foreach($user->roles as $key => $entry)
-                            <span class="badge badge-relationship">{{ $entry->title }}</span>
-                        @endforeach
+                        
+                        {{ $subscriber->subphase->phase->name }}
+                      
                     </td>
                     <td>
                         <div class="flex justify-end">
-                            @can('user_show')
-                                <a class="btn btn-sm btn-info mr-2" href="{{ route('admin.users.show', $user) }}">
+                            @can('subscriber_show')
+                                <a class="btn btn-sm btn-info mr-2" href="{{ route('admin.subscribers.show', $subscriber) }}">
                                     {{ trans('global.view') }}
                                 </a>
                             @endcan
-                            @can('user_edit')
-                                <a class="btn btn-sm btn-success mr-2" href="{{ route('admin.users.edit', $user) }}">
+                            @can('subscriber_edit')
+                                <a class="btn btn-sm btn-success mr-2" href="{{ route('admin.subscribers.edit', $subscriber) }}">
                                     {{ trans('global.edit') }}
                                 </a>
                             @endcan
-                            @can('user_delete')
-                                <button class="btn btn-sm btn-rose mr-2" type="button" wire:click="confirm('delete', {{ $user->id }})" wire:loading.attr="disabled">
+                            @can('subscriber_delete')
+                                <button class="btn btn-sm btn-rose mr-2" type="button" wire:click="confirm('delete', {{ $subscriber->id }})" wire:loading.attr="disabled">
                                     {{ trans('global.delete') }}
                                 </button>
                             @endcan
@@ -114,7 +110,7 @@
                     {{ __('Entries selected') }}
                 </p>
             @endif
-            {{ $users->links() }}
+            {{ $subscribers->links() }}
         </div>
     </div>
 </div>

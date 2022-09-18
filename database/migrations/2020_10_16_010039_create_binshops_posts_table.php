@@ -41,6 +41,7 @@ class CreateBinshopsPostsTable extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('binshops_post_categories');
         Schema::dropIfExists('binshops_posts');
     }
 }

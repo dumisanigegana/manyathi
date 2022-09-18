@@ -22,8 +22,8 @@ class DashboardController
 
     public function edit()
     {
-        $subscriber = Auth::user()->subscriber;
-        $countries = Country::all();
+        $subscriber = Auth::user()->subscriber;        
+        $countries = Country::pluck('nicename');
         return view('front.edit-profile', ['subscriber' => $subscriber, 'countries' => $countries]);
     }
 
@@ -54,10 +54,8 @@ class DashboardController
         ]);
 
         if($request['avatar']) { 
-            $file = $request->file('avatar'); 
-            $name = $file->hashName(); // Generate a unique, random name...
-            $extension = $file->extension(); // Determine the file's extension based on the file's MIME type...              
-            $fileName = Auth::user()->subscriber->account . "." . $extension;
+            $file = $request->file('avatar');           
+            $fileName = $file->hashName();
             $filePath =  $request->file('avatar')->storeAs('avatars', $fileName, 'public');
             $file_path = '/storage/' . $filePath;
             // dd($extension);
@@ -119,5 +117,5 @@ class DashboardController
         }       
         
     }
-    
+
 }
