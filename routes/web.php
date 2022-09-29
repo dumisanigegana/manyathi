@@ -17,16 +17,20 @@ use Illuminate\Support\Facades\Route;
 Route::redirect('/', '/login');
 
 Auth::routes(['register' => false]);
+Auth::routes(['verify' => true]);
 
 Route::get('/book', [WelcomeController::class, 'book'])->name('book');
 Route::get('/register', [RegisterController::class, 'register'])->name('register');
 Route::post('/register', [RegisterController::class, 'store'])->name('register_store');
 
-Route::group(['middleware' => ['auth']], function () {
+Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/dash', [DashboardController::class, 'index'])->name('dash');
     Route::get('/update', [DashboardController::class, 'edit']);
     Route::put('/update', [DashboardController::class, 'update'])->name('prof_update');
     Route::post('/pic', [DashboardController::class, 'pic'])->name('pic');
+    Route::post('/payment', [DashboardController::class, 'payment']);
+    Route::post('/book', [DashboardController::class, 'book']);
+
 
     Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['admin']], function () {
         

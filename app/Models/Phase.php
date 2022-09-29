@@ -46,4 +46,14 @@ class Phase extends Model implements AuditableContract
     {
         return $this->hasMany(Subphase::class);
     }
+
+    /**
+     * Get all of the subscribers for the Phase
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
+     */
+    public function subscribers(): HasManyThrough
+    {
+        return $this->hasManyThrough(Subscriber::class, Subphase::class);
+    }
 }

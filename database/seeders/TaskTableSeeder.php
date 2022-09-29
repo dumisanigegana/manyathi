@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Task;
 use Illuminate\Database\Seeder;
 
 class TaskTableSeeder extends Seeder
@@ -14,6 +14,21 @@ class TaskTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        $tasks = [
+            [
+                'id'    => 1,
+                'name' => 'Visitations',
+                'subphase_id' => 25,
+                'description' => 'Visiting the needy'
+            ],
+            [
+                'id'    => 2,
+                'name' => 'Singing',
+                'subphase_id' => 25,
+                'description' => 'Songs and praises'
+            ],
+        ];
+
+        Task::insert($tasks);
     }
 }

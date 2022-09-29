@@ -74,4 +74,19 @@ class Subscriber extends Model implements AuditableContract
         return Carbon::createFromFormat('Y-m-d', $this->attributes['dob'])->format('d/m/Y');
     }
 
+    /**
+     * Get all of the acheivments for the Subscriber
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function acheivements()
+    {
+        return $this->hasMany(Acheivement::class);
+    }
+
+    public function hasAction( $id)
+    {
+        return $this->acheivements->contains($id) ? true:false;
+    }
+
 }

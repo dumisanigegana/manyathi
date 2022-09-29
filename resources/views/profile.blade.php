@@ -1,7 +1,7 @@
 @extends('layouts.front')
 @section('content')
 <div class="md:flex no-wrap md:-mx-2 pt-8 object-contain ">
-    <!-- Left Side -->
+    <!-- Left Side Avatar and Phases -->
     <div class="w-full md:w-3/12 md:mx-2 mt-3">
         <!-- Profile Card -->
         <div class="bg-white p-3 border-t-4 border-green-400"  x-data="{ 'showModal': false }" @keydown.escape="showModal = false" >
@@ -24,26 +24,46 @@
                 </div>
                 <!--/Dialog -->
             </div><!-- /Overlay -->
-            <h1 class="text-gray-900 font-bold text-xl text-center leading-8 my-1">{{ $subscriber->user->fullname }}</h1>
+            <h1 class="text-gray-900 font-bold text-xl text-center leading-8 my-1">{{ $subscriber->user->fullname }}{{-- $subscriber->subphase->phase->name --}}</h1>
             
             <ul
-                class="bg-gray-100 text-gray-600 hover:text-gray-700 hover:shadow py-2 px-3 mt-3 divide-y rounded shadow-sm">
-                <li class="flex items-center py-3 w-full">
-                    <span>Status</span>
+                class="bg-gray-100 text-gray-800 hover:text-gray-700 hover:shadow py-2 px-3 mt-3 divide-y rounded shadow-sm">
+                {{-- <li class="flex items-center py-3 w-full">
+                    <span class="font-bold">Status: </span>
                     <span class="ml-auto"><span
                             class="bg-green-500 py-1 px-2 rounded text-white text-sm">Active</span></span>
+                </li> --}}
+                <li class="flex items-center py-3">
+                    <span class="font-bold">Phase: </span>
+                    <span class="ml-auto"> {{ $subscriber->subphase->phase->name }}</span>
                 </li>
                 <li class="flex items-center py-3">
-                    <span>Phase </span>
-                    <span class="ml-auto"> {{ $subscriber->subphase->phase->name }} {{ $subscriber->subphase->name }} </span>
-                </li>
-                <li class="flex items-center py-3">
-                    <span>Reference Number </span>
+                    <span class="font-bold">Reference #: </span>
                     <span class="ml-auto"> {{ $subscriber->account }} </span>
                 </li>
                 <li class="flex items-center py-3">
-                    <span>Upliner Number </span>
-                    <span class="ml-auto"> {{ $subscriber->referee->user->fullname }} {{ $subscriber->referee->account }} </span>
+                    <span class="font-bold">Upliner Number: </span>
+                    <span class="ml-auto"> {{ $subscriber->referee->account }} </span>
+                </li>
+                <li class="flex items-center py-3">
+                    <span class="font-bold">Desciples: </span>
+                    <span class="ml-auto" x-data="{ 'showDesc': false }" @keydown.escape="showDesc = false" >
+                        @if($subscriber->desciples->count() > 2)
+                        <button class="bg-green-500 py-1 px-6 rounded text-white text-sm" @click="showDesc = true">
+                            {{ $subscriber->desciples->count() }}
+                        </button>
+                        @else
+                        None
+                        @endif
+                          <!--Overlay-->
+                        <div class="overflow-auto" style="background-color: rgba(0,0,0,0.5)" x-show="showDesc" :class="{ 'absolute inset-0 z-10 flex items-center justify-center': showDesc }">
+                            <!--Dialog-->
+                            <div class="bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg py-4 text-left px-6" x-show="showDesc" @click.away="showDesc = false" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0 scale-90" x-transition:enter-end="opacity-100 scale-100" x-transition:leave="ease-in duration-10" x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90">
+                                @include('front.desciples')
+                            </div>
+                            <!--/Dialog -->
+                        </div><!-- /Overlay -->
+                    </span>                    
                 </li>
             </ul>
         </div>
@@ -110,8 +130,6 @@
                         <a  href="{{ url('/update') }}" >Edit your details </a></button> 
                     {{-- <button @click="open = true" class="border-2 mx-auto border-green-400 text-green-400 hover:bg-green-400 hover:text-white font-bold py-1 my-1 px-4 rounded">Edit your details</button>  --}}
                         <!--Overlay-->
-                      
-                  
                 </div>              
             </div>                
         </div>
@@ -132,135 +150,30 @@
                                     d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                             </svg>
                         </span>
-                        <span class="tracking-wide">Desciples</span>
+                        <span class="tracking-wide"> Activities {{ $subscriber->subphase->phase->name }}</span>
                     </div>
-                    <div class="list-inside flex flex-wrap p-4">
-					<!-- if exit statement -->
-                        @foreach($subscriber->desciples as $desciple)
-                        <div class="text-center basis-1/4 border-r-8 mb-4 border-white bg-gray-100 flex-item">
-                            <div class="flex flex-col space-x-3 mt-1 items-center">
-                                <img class="h-16 w-16 rounded-full mx-auto"
-                                    src="https://cdn.australianageingagenda.com.au/wp-content/uploads/2015/06/28085920/Phil-Beckett-2-e1435107243361.jpg"
-                                    alt="">
-                                <div class="flex flex-row space-x-5 items-center">
-                                    <span  class="text-gray-800">{{ $desciple->user->fullname }}</span>
-                                    <span class="bg-green-300 w-5 h-5 items-center text-xs text-gray-800 text-sm font-semibold inline-flex p-1.5 rounded-full mr-2">
-                                        {{ $desciple->desciples->count() }}
-                                    </span> 
-                                </div>
-                            </div>
-                        </div>
-                        @endforeach  
-                        <div class="text-center basis-1/4 border-r-8 mb-4 border-white bg-gray-100 flex-item">
-                            <div class="flex flex-col items-center space-x-3 mt-1">
-                                <img class="h-16 w-16 rounded-full mx-auto"
-                                    src="https://cdn.australianageingagenda.com.au/wp-content/uploads/2015/06/28085920/Phil-Beckett-2-e1435107243361.jpg"
-                                    alt="">
-                                <div class="flex flex-row items-center space-x-3 w-full">
-                                    <span  class="text-gray-800 text-left">{{ $desciple->user->fullname }}</span>
-                                    <span  class="text-green-500 text-xs text-right mr-2">{{-- $desciple->desciples->count --}} 3 desciples</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="text-center basis-1/4 border-r-8 mb-4 border-white bg-gray-100 flex-item">
-                            <div class="flex flex-col items-center space-x-3 mt-1">
-                                <img class="h-16 w-16 rounded-full mx-auto"
-                                    src="https://cdn.australianageingagenda.com.au/wp-content/uploads/2015/06/28085920/Phil-Beckett-2-e1435107243361.jpg"
-                                    alt="">
-                                <div class="flex flex-row items-center space-x-3">
-                                    <span  class="text-gray-800">{{ $desciple->user->fullname }}</span>
-                                    <span  class="text-green-500 text-xs text-right">{{-- $desciple->desciples->count --}} 3 desciples</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="text-center basis-1/4 border-r-8 mb-4 border-white bg-gray-100 flex-item">
-                            <div class="flex flex-col items-center space-x-3 mt-1">
-                                <img class="h-16 w-16 rounded-full mx-auto"
-                                    src="https://cdn.australianageingagenda.com.au/wp-content/uploads/2015/06/28085920/Phil-Beckett-2-e1435107243361.jpg"
-                                    alt="">
-                                <div class="flex flex-row items-center space-x-3">
-                                    <span  class="text-gray-800">{{ $desciple->user->fullname }}</span>
-                                    <span  class="text-green-500 text-xs text-right">{{-- $desciple->desciples->count --}} 3 desciples</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="text-center basis-1/4 border-r-8 mb-4 border-white bg-gray-100 flex-item">
-                            <div class="flex flex-col items-center space-x-3 mt-1">
-                                <img class="h-16 w-16 rounded-full mx-auto"
-                                    src="https://cdn.australianageingagenda.com.au/wp-content/uploads/2015/06/28085920/Phil-Beckett-2-e1435107243361.jpg"
-                                    alt="">
-                                <div class="flex flex-row items-center space-x-3">
-                                    <span  class="text-gray-800">{{ $desciple->user->fullname }}</span>
-                                    <span  class="text-green-500 text-xs text-right">{{-- $desciple->desciples->count --}} 3 desciples</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="text-center basis-1/4 border-r-8 mb-4 border-white bg-gray-100 flex-item">
-                            <div class="flex flex-col items-center space-x-3 mt-1">
-                                <img class="h-16 w-16 rounded-full mx-auto"
-                                    src="https://cdn.australianageingagenda.com.au/wp-content/uploads/2015/06/28085920/Phil-Beckett-2-e1435107243361.jpg"
-                                    alt="">
-                                <div class="flex flex-row items-center space-x-3">
-                                    <span  class="text-gray-800">{{ $desciple->user->fullname }}</span>
-                                    <span  class="text-green-500 text-xs text-right">{{-- $desciple->desciples->count --}} 3 desciples</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="text-center basis-1/4 border-r-8 mb-4 border-white bg-gray-100 flex-item">
-                            <div class="flex flex-col items-center space-x-3 mt-1">
-                                <img class="h-16 w-16 rounded-full mx-auto"
-                                    src="https://cdn.australianageingagenda.com.au/wp-content/uploads/2015/06/28085920/Phil-Beckett-2-e1435107243361.jpg"
-                                    alt="">
-                                <div class="flex flex-row items-center space-x-3">
-                                    <span  class="text-gray-800">{{ $desciple->user->fullname }}</span>
-                                    <span  class="text-green-500 text-xs text-right">{{-- $desciple->desciples->count --}} 3 desciples</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="text-center basis-1/4 border-r-8 mb-4 border-white bg-gray-100 flex-item">
-                            <div class="flex flex-col items-center space-x-3 mt-1">
-                                <img class="h-16 w-16 rounded-full mx-auto"
-                                    src="https://cdn.australianageingagenda.com.au/wp-content/uploads/2015/06/28085920/Phil-Beckett-2-e1435107243361.jpg"
-                                    alt="">
-                                <div class="flex flex-row items-center space-x-3">
-                                    <span  class="text-gray-800">{{ $desciple->user->fullname }}</span>
-                                    <span  class="text-green-500 text-xs text-right">{{-- $desciple->desciples->count --}} 3 desciples</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="text-center basis-1/4 border-r-8 mb-4 border-white bg-gray-100 flex-item">
-                            <div class="flex flex-col items-center space-x-3 mt-1">
-                                <img class="h-16 w-16 rounded-full mx-auto"
-                                    src="https://cdn.australianageingagenda.com.au/wp-content/uploads/2015/06/28085920/Phil-Beckett-2-e1435107243361.jpg"
-                                    alt="">
-                                <div class="flex flex-row items-center space-x-3">
-                                    <span  class="text-gray-800">{{ $desciple->user->fullname }}</span>
-                                    <span  class="text-green-500 text-xs text-right">{{-- $desciple->desciples->count --}} 3 desciples</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="text-center basis-1/4 border-r-8 mb-4 border-white bg-gray-100 flex-item">
-                            <div class="flex flex-col items-center space-x-3 mt-1">
-                                <img class="h-16 w-16 rounded-full mx-auto"
-                                    src="https://cdn.australianageingagenda.com.au/wp-content/uploads/2015/06/28085920/Phil-Beckett-2-e1435107243361.jpg"
-                                    alt="">
-                                <div class="flex flex-row items-center space-x-3">
-                                    <span  class="text-gray-800">{{ $desciple->user->fullname }}</span>
-                                    <span  class="text-green-500 text-xs text-right">{{-- $desciple->desciples->count --}} 3 desciples</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="text-center basis-1/4 border-r-8 mb-4 border-white bg-gray-100 flex-item">
-                            <div class="flex flex-col items-center space-x-3 mt-1">
-                                <img class="h-16 w-16 rounded-full mx-auto"
-                                    src="https://cdn.australianageingagenda.com.au/wp-content/uploads/2015/06/28085920/Phil-Beckett-2-e1435107243361.jpg"
-                                    alt="">
-                                <div class="flex flex-row items-center space-x-3">
-                                    <span  class="text-gray-800">{{ $desciple->user->fullname }}</span>
-                                    <span  class="text-green-500 text-xs text-right">{{-- $desciple->desciples->count --}} 3 desciples</span>
-                                </div>
-                            </div>
-                        </div>                          
+                    @cannot('admin_access')
+                    <table class="table-fixed w-full ">  
+                        <thead>
+                            <td class="font-bold text-blue-500">Activity</td>
+                            <td class="text-yellow-600">Status</td>
+                            <td class="text-yellow-600">Action</td>
+                        </thead>        
+                        <tbody>                            
+                            @foreach($phase->subphases as $subphase)
+                            <tr>
+                            <td class="font-bold text-blue-500">{{ $subphase->name}}</td>
+                            <td class="uppercase text-yellow-600">{{ $subphase->description}}</td>
+                            <td class="uppercase text-yellow-600">
+                                {{-- {{ $subscriber->acheivements }} --}}
+                                 @if($subscriber->hasAction($subphase->id)) True
+                                @else false @endif 
+                            </td>
+                            </tr>                            
+                            @endforeach
+                        </tbody> 
+                        </table>
+                        @endcannot					
                     </div>
                 </div>
             </div>

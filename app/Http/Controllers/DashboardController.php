@@ -3,21 +3,30 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;  
+use App\Models\Phase;  
 use App\Models\Country;  
 use App\Models\Subscriber; 
 use Illuminate\Http\Request; 
 use Illuminate\Support\Facades\Validator;
+use App\Mail\Book;
+use App\Mail\Payment;
 // use Illuminate\Validation\Validator;
 Use Alert;
 use Auth;
 
 class DashboardController
 {
+    // public function __construct()
+    // {
+    //     $this->middleware(['auth', 'verified']);
+    // }
+
     public function index()
     {
         $subscriber = Auth::user()->subscriber;
         $countries = Country::pluck('nicename');
-        return view('profile', ['subscriber' => $subscriber, 'countries' => $countries]);
+        $phase = Phase::find($subscriber->subphase->phase->id);
+        return view('profile', ['subscriber' => $subscriber, 'countries' => $countries, 'phase' => $phase]);
     }
 
     public function edit()

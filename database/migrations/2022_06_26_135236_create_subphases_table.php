@@ -19,6 +19,8 @@ class CreateSubphasesTable extends Migration
             $table->unsignedTinyInteger('possition');            
             $table->string('name')->unique();
             $table->string('description');
+            $table->string('action')->nullable();
+            $table->integer('data')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

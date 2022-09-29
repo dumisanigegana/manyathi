@@ -6,11 +6,14 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\Subscriber;
 use App\Models\Country;
+use App\Models\Acheivement;
 // use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request; 
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use App\Mail\Subscribe;
+use Illuminate\Support\Facades\Mail;
 Use Alert;
 
 class RegisterController extends Controller
@@ -89,16 +92,38 @@ class RegisterController extends Controller
         ]);
 
         $subscriber = Subscriber::create([
-            'dob'     => $request['dob'],
-            'identity'     => $request['identity'],
-            'gender'     => $request['gender'],
-            'country'    => $request['country'],
-            'city'    => $request['city'],
-            'address'    => $request['address'],
-            'country'    => $request['country'],
-            'cell'    => $request['cell_country'] . $cell,
-            'user_id'    => $user->id
+            'dob'           => $request['dob'],
+            'identity'      => $request['identity'],
+            'gender'        => $request['gender'],
+            'country'       => $request['country'],
+            'city'          => $request['city'],
+            'address'       => $request['address'],
+            'country'       => $request['country'],
+            'cell'          => $request['cell_country'] . $cell,
+            'user_id'       => $user->id,
+            'subphase_id'   => 3
         ]);
+        
+        for($i=1;$i<3; $i++)
+        {
+           Acheivement::create([
+            'subscriber_id'  =>     $subscriber->id,
+            'subphase_id'    =>     $i,
+            'status'         =>     "Completed"
+           ]);
+        }
+        $message = "This is the message variable";
+
+        if ($subscriber) {
+            Mail::to($user->email)->send(new Subscribe($subscriber, $message));
+            // return new JsonResponse(
+            //     [
+            //         'success' => true, 
+            //         'message' => "Thank you for subscribing to our email, please check your inbox"
+            //     ], 
+            //     200
+            // );
+        }
 
         Alert::success('Submited', 'Your profile has been created. To proceed, follow the instructions sent to '. $request['email'])->showConfirmButton('Ok', '#00FA9A');
         return redirect()->route('login');

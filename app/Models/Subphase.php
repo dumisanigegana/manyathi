@@ -17,17 +17,31 @@ class Subphase extends Model implements AuditableContract
 
     public $orderable = [
         'id',
-        'name',
+        'name',       
+        'phase_id',
+        'possition',
+        'description',
+        'action',
+        'data'
     ];
 
     public $filterable = [
         'id',
-        'name',
+        'name',      
+        'phase_id',
+        'possition',
+        'description',
+        'action',
+        'data'
     ];
 
     protected $fillable = [
-        'name',
-        'description'
+        'name',    
+        'phase_id',
+        'possition',
+        'description',
+        'action',
+        'data'
     ];
 
     protected $dates = [
@@ -54,6 +68,16 @@ class Subphase extends Model implements AuditableContract
     public function tasks()
     {
         return $this->hasMany(Task::class);
+    }
+
+    /**
+     * Get all of the acheivments for the Subscriber
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function acheivments(): HasMany
+    {
+        return $this->hasMany(Acheivment::class);
     }
 
 }

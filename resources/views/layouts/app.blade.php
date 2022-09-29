@@ -12,6 +12,8 @@
 </head>
 
 <body class="text-blueGray-800 antialiased">
+    
+    @include('sweetalert::alert')
 
     <noscript>You need to enable JavaScript to run this app.</noscript>
 
@@ -28,10 +30,9 @@
     <form id="logoutform" action="{{ route('logout') }}" method="POST" style="display: none;">
         {{ csrf_field() }}
     </form>
-    <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
-    @livewireScripts
-    
+    @livewireScripts    
     @livewire('livewire-ui-modal') 
+    <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
 </body>
 
 </html>

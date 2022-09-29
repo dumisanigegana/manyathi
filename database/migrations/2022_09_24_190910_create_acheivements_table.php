@@ -13,11 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('subscriber_tasks', function (Blueprint $table) {
+        Schema::create('acheivements', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('subscriber_id');     
-            $table->foreignId('task_id');     
+            $table->foreignId('subscriber_id');  
+            $table->foreignId('subphase_id');  
+            $table->string('comments')->nullable();
+            $table->string('status')->default('Pending');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -28,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('subscriber_tasks');
+        Schema::dropIfExists('acheivements');
     }
 };

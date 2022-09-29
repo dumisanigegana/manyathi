@@ -14,7 +14,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
 
-class User extends Authenticatable  implements AuditableContract
+class User extends Authenticatable  implements AuditableContract, MustVerifyEmail
 {
     // use HasFactory;
     use HasAdvancedFilter;

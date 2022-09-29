@@ -16,9 +16,10 @@ return new class extends Migration
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
-            $table->string('subphase_id');           
-            $table->unsignedTinyInteger('possition');   
+            $table->foreignId('subphase_id');       
+            $table->string('description')->nullable();  
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
