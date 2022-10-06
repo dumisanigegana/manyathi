@@ -12,6 +12,11 @@ class CreateTransactionsTable extends Migration
             $table->bigIncrements('id');
             $table->decimal('amount', 15, 2)->nullable();
             $table->date('transaction_date')->nullable();
+            $table->smallInteger('credit')->nullable();
+            $table->string('reference');
+            $table->string('fullname');
+            $table->string('email');
+            $table->boolean('confirmed')->default(false);
             $table->timestamps();
             $table->softDeletes();
         });

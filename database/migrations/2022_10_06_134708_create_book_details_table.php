@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePayablesTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreatePayablesTable extends Migration
      */
     public function up()
     {
-        Schema::create('payables', function (Blueprint $table) {
+        Schema::create('book_details', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
-            $table->string('description');
-            $table->double('price', 15, 2)->default(1.00);
+            $table->foreignId('transaction_id');
+            $table->text('security');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -30,6 +29,6 @@ class CreatePayablesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('payables');
+        Schema::dropIfExists('book_details');
     }
-}
+};

@@ -33,7 +33,7 @@
                                            class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150{{ $errors->has('username') ? ' border border-red-500' : '' }}"
                                            required
                                            autofocus
-                                           placeholder="Refebence# or Email address"
+                                           placeholder="Username or Email address"
                                            value="{{ old('username', null) }}">
 
 @if($errors->has('username'))

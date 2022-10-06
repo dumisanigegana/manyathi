@@ -22,17 +22,32 @@ class Transaction extends Model implements AuditableContract
     public $orderable = [
         'id',
         'amount',
+        'reference',
+        'email',
+        'credit',
+        'fullname',
+        'confirmed',
         'transaction_date',
     ];
 
     public $filterable = [
         'id',
         'amount',
+        'reference',
+        'email',
+        'credit',
+        'fullname',
+        'confirmed',
         'transaction_date',
     ];
 
     protected $fillable = [
         'amount',
+        'reference',
+        'email',
+        'credit',
+        'fullname',
+        'confirmed',
         'transaction_date',
     ];
 

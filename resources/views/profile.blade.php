@@ -4,8 +4,8 @@
     <!-- Left Side Avatar and Phases -->
     <div class="w-full md:w-3/12 md:mx-2 mt-3">
         <!-- Profile Card -->
-        <div class="bg-white p-3 border-t-4 border-green-400"  x-data="{ 'showModal': false }" @keydown.escape="showModal = false" >
-            <div class="image overflow-hidden"  @click="showModal = true">
+        <div class="bg-white p-3 border-t-4 border-green-400" x-data="{ 'showModal': false }" @keydown.escape="showModal = false" x-cloak>
+            <div class="image overflow-hidden" @click="showModal = true">
                 @if ($subscriber->avatar)
                 <img class="h-auto w-full mx-auto"
                     src="{{ $subscriber->avatar }}" alt="Profile Picture"
@@ -47,7 +47,7 @@
                 </li>
                 <li class="flex items-center py-3">
                     <span class="font-bold">Desciples: </span>
-                    <span class="ml-auto" x-data="{ 'showDesc': false }" @keydown.escape="showDesc = false" >
+                    <span class="ml-auto" x-data="{ 'showDesc': false }" @keydown.escape="showDesc = false" x-cloak>
                         @if($subscriber->desciples->count() > 2)
                         <button class="bg-green-500 py-1 px-6 rounded text-white text-sm" @click="showDesc = true">
                             {{ $subscriber->desciples->count() }}

@@ -19,7 +19,8 @@ class DatabaseSeeder extends Seeder
             SubscribersTableSeeder::class,
             CountriesTableSeeder::class,
             TaskTableSeeder::class,
-            BinshopsLanguagesTableSeeder::class,
+            BooksTableSeeder::class,
+            // BinshopsLanguagesTableSeeder::class,
         ]);
     }
 }

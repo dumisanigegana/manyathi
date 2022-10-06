@@ -7,13 +7,9 @@
 - Run __composer install__
 - Run __php artisan key:generate__
 - Run __php artisan migrate --seed__ (it has some seeded data for your testing)
+- Run __sudo apt install pdftk__ To install PDFTK for locking PDF files, [click here](https://www.pdflabs.com/tools/pdftk-the-pdf-toolkit/) for more.
 - That's it: launch the main URL. 
 - You can login to adminpanel by going go `/login` URL and login with credentials __admin@admin.com__ - __password__
 
 
-## License
-
-Basically, feel free to use and re-use any way you want.
-
----
 

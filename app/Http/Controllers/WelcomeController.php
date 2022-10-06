@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 // use App\Models\User;  
-// use App\Models\Country;  
-// use App\Models\Subscriber; 
+use App\Models\Book;  
+use App\Models\Country; 
 use Illuminate\Http\Request; 
 use Illuminate\Support\Facades\Validator;
 Use Alert;
@@ -12,10 +12,11 @@ use Auth;
 
 class WelcomeController
 {
-    public function book()
+    public function book(int $id = 1)
     {
-       
-        return view('front.book');
+       $book = Book::where('subphase_id',$id)->first(); 
+       $countries = Country::all();
+        return view('front.book', ['book' => $book, 'countries' => $countries]);
     }
 
     public function edit()
