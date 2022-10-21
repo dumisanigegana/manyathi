@@ -79,7 +79,7 @@
               <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"></path>
             </svg>
           </button>  --}}
-          {{-- <a class="flex ml-auto border-0 py-2 px-2 focus:outline-none hover:bg-gray-100 rounded" href='https://www.paynow.co.zw/Payment/Link/?q=c2VhcmNoPXBheW5vdyU0MGdzdS5hYy56dyZhbW91bnQ9NS4wMCZyZWZlcmVuY2U9Jmw9MA%3d%3d' target='_blank'><img src='https://www.paynow.co.zw/Content/Buttons/Medium_buttons/button_buy-now_medium.png' style='border:0' /></a> --}}
+           <a class="flex ml-auto border-0 py-2 px-2 focus:outline-none hover:bg-gray-100 rounded" href='https://www.paynow.co.zw/Payment/Link/?q=c2VhcmNoPXBheW5vdyU0MGdzdS5hYy56dyZhbW91bnQ9NS4wMCZyZWZlcmVuY2U9Jmw9MA%3d%3d' target='_blank'><img src='https://www.paynow.co.zw/Content/Buttons/Medium_buttons/button_buy-now_medium.png' style='border:0' /></a> 
           <!--Overlay-->
           <div class="overflow-auto" style="background-color: rgba(0,0,0,0.5)" x-show="showModal" :class="{ 'absolute inset-0 z-10 flex items-center justify-center': showModal }">
             <!--Dialog-->

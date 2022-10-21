@@ -16,7 +16,7 @@
             Full name
         </label>  	                    
         <input 
-            type="text" name="name" required
+            type="text" name="fullname" required
             class="block my-3 w-full text-lg text-gray-800 bg-green-100 rounded-lg cursor-pointer focus:outline-none"             
         >
 
@@ -42,6 +42,7 @@
         </div>
         <input type="hidden" name="amount" value="5">
         <input type="hidden" name="purpose" value="Phase one book">
+        <input type="hidden" name="credit" value="0">
     </div>
 
     <!--Footer-->

@@ -2,6 +2,9 @@
     namespace App\Traits;
 
     use Illuminate\Http\Request;
+    use Auth;
+    use App\Models\Transaction;
+    use Illuminate\Support\Facades\Http;
 
     trait PaynowTrait 
     {
@@ -11,28 +14,31 @@
          * @return $this|false|string         
          * Initiates Paynow Payments
          */
-        public function intiate($amount, $fullname, $email, $purpose)
+        public function intiate(Request $request)
         {         
             $resulturl = env('APP_URL') .'/api/payments/';
             $status = 'Message';
             $user = Auth::user();
             $payment = new Transaction;        
             $payment->reference = $this->generateMerchanttrace();
-            $payment->email = $email;
-            $payment->amount = $amount;
-            $payment->fullname = $fullname;
+            $payment->email = $request['email'];
+            $payment->phone = $request['cell'];
+            $payment->credit = $request['credit'];
+            $payment->amount = $request['amount'];
+            $payment->purpose = $request['purpose'];
+            $payment->fullname = $request['fullname'];
             $payment->merchanttrace = $this->generateMerchanttrace();
             $payment->save();
-            $hash = hash('sha512', env('PAYNOW_APP_ID'). $payment->reference . $fullname . $amount .  env('APP_URL') . $resulturl . $email . $payment->merchanttrace. $status . env('PAYNOW_APP_KEY'));
+            $hash = hash('sha512', env('PAYNOW_APP_ID'). $payment->reference . $request['fullname'] . $request['amount'] .  env('APP_URL') . $resulturl . $request['email'] . $payment->merchanttrace. $status . env('PAYNOW_APP_KEY'));
 
             $response = Http::asForm()->post(env('PAYNOW_APP_URL'), [
                 'id' => env('PAYNOW_APP_ID'),
                 'reference' => $payment->reference,
-                'name' => $fullname,
-                'amount' => $amount,
+                'name' => $payment->fullname,
+                'amount' => $payment->amount,
                 'returnurl' => env('APP_URL'),
                 'resulturl' => $resulturl,
-                'authemail' => $email,
+                'authemail' => $payment->email,
                 'merchanttrace' => $payment->merchanttrace,
                 'status'  => $status,
                 'hash' => strtoupper($hash)
@@ -54,7 +60,7 @@
                 $hash = $parts[3][1];
                 $vHash = hash('sha512', $status . $browserurl . $pollurl . env('PAYNOW_APP_KEY'));
                 if(strtoupper($vHash) == $hash) {
-                return redirect()->away($browserurl)->send();
+                    return redirect()->away($browserurl)->send();
                 } else {dd('Try ');}
             } else {dd("NO!!");}   
         }
@@ -73,7 +79,7 @@
 
         public function merchanttraceExists($number) {
             // query the database and return a boolean
-            return Payment::where('merchanttrace', $number)->exists();
+            return Transaction::where('merchanttrace', $number)->exists();
         }
 
         public function init_response(Request $request)

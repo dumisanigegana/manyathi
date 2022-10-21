@@ -15,15 +15,15 @@ use App\Mail\Payment;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Crypt;
 use mikehaertl\pdftk\Pdf;
-use Paynow;
+use App\Traits\PaynowTrait;
 // use Illuminate\Validation\Validator;
 Use Alert;
 use Auth;
 
-class FrontController extends Paynow
+class FrontController extends Controller
 {
     // use mikehaertl\pdftk\Pdf;
-    use Paynow;
+    use PaynowTrait;
     // use Paynow\Payments\Paynow;
 
      /**
@@ -73,7 +73,7 @@ class FrontController extends Paynow
             'fullname.max' => 'First name is too long',
         ]);        
        
-       $response = Paynow::intiate($request['amount'], $request['cell'], $request['fullname'],  $request['email'], $request['purpose']);
+       $response = $this->intiate($request);
        
     }
 
